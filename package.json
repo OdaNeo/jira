@@ -21,6 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "lint": "node_modules/.bin/eslint --ext .tsx,.ts src -c .eslintrc.js",
+    "prettier": "prettier --config ./.prettierrc --write src/*.{ts,tsx}",
     "mock": "json-server __json_server_mock__/db.json --watch"
   },
   "browserslist": {
@@ -52,6 +54,6 @@
     }
   },
   "lint-staged": {
-    "*.{js,css,md,ts,tsx}": "prettier --write"
+    "*.{ts,tsx}": "prettier --write"
   }
 }
