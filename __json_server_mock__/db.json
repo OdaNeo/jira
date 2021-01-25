@@ -1,3 +1,42 @@
 {
-    "users": []
+    "users": [
+        {
+            "id": 1,
+            "name": "a"
+        },
+        {
+            "id": 2,
+            "name": "ab"
+        },
+        {
+            "id": 3,
+            "name": "abc"
+        },
+        {
+            "id": 4,
+            "name": "abcd"
+        }
+    ],
+    "projects": [
+        {
+            "id": 1,
+            "name": "骑手管理",
+            "personId": 1
+        },
+        {
+            "id": 2,
+            "name": "团购",
+            "personId": 2
+        },
+        {
+            "id": 3,
+            "name": "物料",
+            "personId": 3
+        },
+        {
+            "id": 4,
+            "name": "其他",
+            "personId": 4
+        }
+    ]
 }

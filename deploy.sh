@@ -1,3 +1,3 @@
 git add -A
-git commit -m 'add: eslint prettier srcipt'
+git commit -m 'add: hook demo'
 git push origin master
