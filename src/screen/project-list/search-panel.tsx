@@ -1,3 +1,12 @@
+export interface User {
+  id: string
+  name: string
+  email: string
+  title: string
+  organization: string
+  token: string
+}
+
 export const SearchPanel = ({ users, param, setParam }: any): JSX.Element => {
   return (
     <form>

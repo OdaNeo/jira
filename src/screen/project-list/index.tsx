@@ -2,7 +2,7 @@ import { List } from './list'
 import { SearchPanel } from './search-panel'
 import { useState, useEffect } from 'react'
 import * as qs from 'qs'
-import { clearObject } from '../utils/index'
+import { clearObject } from '../../utils/index'
 
 export const ProjectListScreen = (): JSX.Element => {
   const [param, setParam] = useState({
@@ -14,7 +14,7 @@ export const ProjectListScreen = (): JSX.Element => {
   const [list, setList] = useState([])
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_JIRA_BASE_API}/projects?${qs.stringify(clearObject(param))}`).then(async res => {
+    fetch(`${process.env.REACT_APP_API_URL}/projects?${qs.stringify(clearObject(param))}`).then(async res => {
       if (res.ok) {
         setList(await res.json())
       }
@@ -22,7 +22,7 @@ export const ProjectListScreen = (): JSX.Element => {
   }, [param])
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_JIRA_BASE_API}/users`).then(async res => {
+    fetch(`${process.env.REACT_APP_API_URL}/users`).then(async res => {
       if (res.ok) {
         setUsers(await res.json())
       }

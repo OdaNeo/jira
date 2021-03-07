@@ -1,3 +1,3 @@
 git add -A
-git commit -m 'add: hook demo'
+git commit -m 'add: useAuth'
 git push origin master
