@@ -1,37 +1,37 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { List } from './list'
 import { SearchPanel } from './search-panel'
 import { useState, useEffect } from 'react'
-import * as qs from 'qs'
-import { clearObject } from '../../utils/index'
+import { clearObject, useDebounce } from '../../utils/index'
+import { useHttp } from 'utils/http'
+import styled from '@emotion/styled'
 
 export const ProjectListScreen = (): JSX.Element => {
   const [param, setParam] = useState({
     name: '',
     personId: ''
   })
-  const [users, setUsers] = useState([] as Array<{ id: number; name: string }>)
-
+  const [users, setUsers] = useState([] as Array<{ id: string; name: string }>)
   const [list, setList] = useState([])
+  const client = useHttp()
+  const debouncedParam = useDebounce(param, 200)
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/projects?${qs.stringify(clearObject(param))}`).then(async res => {
-      if (res.ok) {
-        setList(await res.json())
-      }
-    })
-  }, [param])
+    client('projects', { data: clearObject(debouncedParam) }).then(setList)
+  }, [debouncedParam])
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/users`).then(async res => {
-      if (res.ok) {
-        setUsers(await res.json())
-      }
-    })
+    client('users').then(setUsers)
   }, [])
   return (
-    <div>
+    <Container>
+      <h1>项目列表</h1>
       <SearchPanel param={param} setParam={setParam} users={users} />
       <List users={users} list={list} />
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  padding: 3.2rem;
+`

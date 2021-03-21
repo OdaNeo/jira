@@ -1,3 +1,9 @@
+/** @jsxImportSource @emotion/react */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { Input, Select, Form } from 'antd'
+
 export interface User {
   id: string
   name: string
@@ -9,35 +15,38 @@ export interface User {
 
 export const SearchPanel = ({ users, param, setParam }: any): JSX.Element => {
   return (
-    <form>
-      <div>
-        <input
+    <Form layout={'inline'} css={{ marginBottom: '2rem' }}>
+      <Form.Item>
+        <Input
+          placeholder={'项目名'}
           value={param.name}
-          onChange={evt =>
+          onChange={value =>
             setParam({
               ...param,
-              name: evt.target.value
+              name: value
             })
           }
           type="text"
         />
-        <select
+      </Form.Item>
+      <Form.Item>
+        <Select
           value={param.personId}
-          onChange={e =>
+          onChange={value =>
             setParam({
               ...param,
-              personId: e.target.value
+              personId: value
             })
           }
         >
-          <option value={''}>负责人</option>
+          <Select.Option value={''}>负责人</Select.Option>
           {users.map((user: any) => (
-            <option value={user.id} key={user.id}>
+            <Select.Option value={user.id} key={user.id}>
               {user.name}
-            </option>
+            </Select.Option>
           ))}
-        </select>
-      </div>
-    </form>
+        </Select>
+      </Form.Item>
+    </Form>
   )
 }
