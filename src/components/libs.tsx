@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { Spin, Typography } from 'antd'
 
 export const Row = styled.div<{ gap?: number | boolean; between?: boolean; marginBottom?: number }>`
   display: flex;
@@ -12,3 +13,22 @@ export const Row = styled.div<{ gap?: number | boolean; between?: boolean; margi
       typeof props.gap === 'number' ? props.gap + 'rem' : props.gap ? '2rem' : undefined} !important;
   }
 `
+
+const FullPage = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const FullPageLoading = () => (
+  <FullPage>
+    <Spin size={'large'} />
+  </FullPage>
+)
+
+export const FullPageErrorFallback = ({ error }: { error: Error | null }) => (
+  <FullPage>
+    <Typography.Text type={'danger'}>{error?.message}</Typography.Text>
+  </FullPage>
+)

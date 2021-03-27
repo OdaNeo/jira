@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Input, Select, Form } from 'antd'
+import { ChangeEvent } from 'react'
 
 export interface User {
   id: string
@@ -20,10 +19,10 @@ export const SearchPanel = ({ users, param, setParam }: any): JSX.Element => {
         <Input
           placeholder={'项目名'}
           value={param.name}
-          onChange={value =>
+          onChange={(evt: ChangeEvent<HTMLInputElement>) =>
             setParam({
               ...param,
-              name: value
+              name: evt.target.value
             })
           }
           type="text"
@@ -40,7 +39,7 @@ export const SearchPanel = ({ users, param, setParam }: any): JSX.Element => {
           }
         >
           <Select.Option value={''}>负责人</Select.Option>
-          {users.map((user: any) => (
+          {users.map((user: User) => (
             <Select.Option value={user.id} key={user.id}>
               {user.name}
             </Select.Option>
