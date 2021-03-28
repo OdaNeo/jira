@@ -3,37 +3,54 @@ import { useAuth } from 'context/auth-context'
 import { ProjectListScreen } from 'screen/project-list/index'
 import { Row } from 'components/libs'
 import { Dropdown, Menu, Button } from 'antd'
-
+import { Route, Routes, Navigate } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
+import { ProjectScreen } from 'screen/project/index'
+import { resetRoute } from 'utils'
 export const AuthenticatedApp = () => {
-  const { user, logout } = useAuth()
   return (
     <Container>
-      <Header between={true}>
-        <HeaderLeft gap={true}>
-          <h2>Logo</h2>
-          <h2>项目</h2>
-          <h2>用户</h2>
-        </HeaderLeft>
-        <HeaderRight>
-          <Dropdown
-            overlay={
-              <Menu>
-                <Menu.Item key={'logout'}>
-                  <Button type={'link'} onClick={logout}>
-                    登出
-                  </Button>
-                </Menu.Item>
-              </Menu>
-            }
-          >
-            <Button type={'link'}>Hi, {user?.name}</Button>
-          </Dropdown>
-        </HeaderRight>
-      </Header>
+      <PageHeader />
       <Main>
-        <ProjectListScreen />
+        <BrowserRouter>
+          <Routes>
+            <Route path={'/projects'} element={<ProjectListScreen />}></Route>
+            <Route path={'/projects/:projectId/*'} element={<ProjectScreen />}></Route>
+            <Navigate to={'/projects'} />
+          </Routes>
+        </BrowserRouter>
       </Main>
     </Container>
+  )
+}
+
+const PageHeader = () => {
+  const { user, logout } = useAuth()
+  return (
+    <Header between={true}>
+      <HeaderLeft gap={true}>
+        <Button type={'link'} onClick={resetRoute}>
+          <h2>Logo</h2>
+        </Button>
+        <h2>项目</h2>
+        <h2>用户</h2>
+      </HeaderLeft>
+      <HeaderRight>
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item key={'logout'}>
+                <Button type={'link'} onClick={logout}>
+                  登出
+                </Button>
+              </Menu.Item>
+            </Menu>
+          }
+        >
+          <Button type={'link'}>Hi, {user?.name}</Button>
+        </Dropdown>
+      </HeaderRight>
+    </Header>
   )
 }
 

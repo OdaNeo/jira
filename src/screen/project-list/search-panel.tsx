@@ -11,8 +11,16 @@ export interface User {
   organization: string
   token: string
 }
+interface SearchPanelProps {
+  users: User[]
+  param: {
+    name: string
+    personId: string
+  }
+  setParam: (param: SearchPanelProps['param']) => void
+}
 
-export const SearchPanel = ({ users, param, setParam }: any): JSX.Element => {
+export const SearchPanel = ({ users, param, setParam }: SearchPanelProps): JSX.Element => {
   return (
     <Form layout={'inline'} css={{ marginBottom: '2rem' }}>
       <Form.Item>
@@ -40,7 +48,7 @@ export const SearchPanel = ({ users, param, setParam }: any): JSX.Element => {
         >
           <Select.Option value={''}>负责人</Select.Option>
           {users.map((user: User) => (
-            <Select.Option value={user.id} key={user.id}>
+            <Select.Option value={String(user.id)} key={user.id}>
               {user.name}
             </Select.Option>
           ))}
