@@ -1,10 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
-import { Input, Select, Form } from 'antd'
+import { Input, Form } from 'antd'
+import { UserSelect } from 'components/user-select'
 import { ChangeEvent } from 'react'
+import { Project } from './list'
 
 export interface User {
-  id: string
+  id: number
   name: string
   email: string
   title: string
@@ -13,14 +15,11 @@ export interface User {
 }
 interface SearchPanelProps {
   users: User[]
-  param: {
-    name: string
-    personId: string
-  }
+  param: Partial<Pick<Project, 'name' | 'personId'>>
   setParam: (param: SearchPanelProps['param']) => void
 }
 
-export const SearchPanel = ({ users, param, setParam }: SearchPanelProps): JSX.Element => {
+export const SearchPanel = ({ param, setParam }: SearchPanelProps): JSX.Element => {
   return (
     <Form layout={'inline'} css={{ marginBottom: '2rem' }}>
       <Form.Item>
@@ -37,22 +36,16 @@ export const SearchPanel = ({ users, param, setParam }: SearchPanelProps): JSX.E
         />
       </Form.Item>
       <Form.Item>
-        <Select
+        <UserSelect
+          defaultOptionName={'负责人'}
           value={param.personId}
-          onChange={value =>
+          onChange={(value: number | undefined) =>
             setParam({
               ...param,
               personId: value
             })
           }
-        >
-          <Select.Option value={''}>负责人</Select.Option>
-          {users.map((user: User) => (
-            <Select.Option value={String(user.id)} key={user.id}>
-              {user.name}
-            </Select.Option>
-          ))}
-        </Select>
+        />
       </Form.Item>
     </Form>
   )
