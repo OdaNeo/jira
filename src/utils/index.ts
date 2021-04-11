@@ -18,7 +18,6 @@ export const clearObject = (obj: { [key: string]: unknown }) => {
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
 
@@ -63,4 +62,18 @@ export const useDocumentTitle = (title: string, keepOnUnMount = true) => {
 // reset router
 export const resetRoute = () => {
   window.location.href = window.location.origin
+}
+
+// 返回组件挂载状态
+export const useMountedRef = () => {
+  const mountedRef = useRef(false)
+
+  useEffect(() => {
+    mountedRef.current = true
+    return () => {
+      mountedRef.current = false
+    }
+  })
+
+  return mountedRef
 }

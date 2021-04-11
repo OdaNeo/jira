@@ -4,7 +4,7 @@ import * as auth from 'auth-provider'
 import { User } from 'screen/project-list/search-panel'
 import { http } from 'utils/http'
 import { useMount } from 'utils/index'
-import { useAsync } from 'utils/useAsync'
+import { useAsync } from 'utils/use-async'
 import { FullPageErrorFallback, FullPageLoading } from 'components/libs'
 
 interface AuthForm {

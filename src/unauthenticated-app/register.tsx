@@ -1,7 +1,7 @@
 import { useAuth } from 'context/auth-context'
 import { Form, Input } from 'antd'
 import { LongButton } from './index'
-import { useAsync } from 'utils/useAsync'
+import { useAsync } from 'utils/use-async'
 export const RegisterScreen = ({ onError }: { onError: (error: Error) => void }): JSX.Element => {
   // 登录/注册
   const { register } = useAuth()
