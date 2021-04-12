@@ -8,55 +8,35 @@ import { BrowserRouter } from 'react-router-dom'
 import { ProjectScreen } from 'screen/project/index'
 import { ProjectModal } from 'screen/project-list/project-modal'
 import { resetRoute } from 'utils'
-import { useState } from 'react'
 import { ProjectPopover } from 'components/project-popover'
 import { ButtonNoPadding } from 'components/libs'
 
 export const AuthenticatedApp = () => {
-  const [projectModalOpen, setProjectModalOpen] = useState(false)
-
   return (
     <Container>
-      <PageHeader
-        projectButton={
-          <ButtonNoPadding onClick={() => setProjectModalOpen(true)} type={'link'}>
-            创建项目
-          </ButtonNoPadding>
-        }
-      />
+      <PageHeader />
       <Main>
         <BrowserRouter>
           <Routes>
-            <Route
-              path={'/projects'}
-              element={
-                <ProjectListScreen
-                  projectButton={
-                    <ButtonNoPadding onClick={() => setProjectModalOpen(true)} type={'link'}>
-                      创建项目
-                    </ButtonNoPadding>
-                  }
-                />
-              }
-            ></Route>
+            <Route path={'/projects'} element={<ProjectListScreen />}></Route>
             <Route path={'/projects/:projectId/*'} element={<ProjectScreen />}></Route>
             <Navigate to={'/projects'} />
           </Routes>
         </BrowserRouter>
       </Main>
-      <ProjectModal projectModalOpen={projectModalOpen} onClose={() => setProjectModalOpen(false)}></ProjectModal>
+      <ProjectModal></ProjectModal>
     </Container>
   )
 }
 
-const PageHeader = (prop: { projectButton: JSX.Element }) => {
+const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
         <ButtonNoPadding type={'link'} onClick={resetRoute}>
           <h2>Logo</h2>
         </ButtonNoPadding>
-        <ProjectPopover {...prop} />
+        <ProjectPopover />
         <span>用户</span>
       </HeaderLeft>
       <HeaderRight>
