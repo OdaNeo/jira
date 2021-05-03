@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { LoginScreen } from './login'
 import { RegisterScreen } from './register'
-import { Card, Divider, Button, Typography } from 'antd'
+import { Card, Divider, Button } from 'antd'
 import styled from '@emotion/styled'
+import { ErrorBox } from 'components/libs'
 // import { Helmet } from 'react-helmet'
 
 export const UnauthenticatedApp = (): JSX.Element => {
@@ -16,7 +17,7 @@ export const UnauthenticatedApp = (): JSX.Element => {
       </Helmet> */}
       <ShadowCard>
         <Title>{isRegister ? '请注册' : '请登录'}</Title>
-        {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null}
+        <ErrorBox error={error} />
         {isRegister ? <RegisterScreen onError={setError} /> : <LoginScreen onError={setError} />}
         <Divider />
         <Button type={'text'} onClick={() => setIsRegister(!isRegister)}>

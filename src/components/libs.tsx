@@ -29,10 +29,28 @@ export const FullPageLoading = () => (
 
 export const FullPageErrorFallback = ({ error }: { error: Error | null }) => (
   <FullPage>
-    <Typography.Text type={'danger'}>{error?.message}</Typography.Text>
+    <ErrorBox error={error} />
   </FullPage>
 )
 
+// error类型守卫
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isError = (value: any): value is Error => value?.message
+
+export const ErrorBox = ({ error }: { error: unknown }) => {
+  if (isError(error)) {
+    return <Typography.Text type={'danger'}>{error?.message}</Typography.Text>
+  }
+  return null
+}
+
 export const ButtonNoPadding = styled(Button)`
   padding: 0;
+`
+
+export const ScreenContainer = styled.div`
+  padding: 3.2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `

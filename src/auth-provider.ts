@@ -1,4 +1,4 @@
-import { User } from 'screen/project-list/search-panel'
+import { User } from 'types/user'
 
 const localStorageKey = '__auth_provider_token__'
 

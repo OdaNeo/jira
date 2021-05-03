@@ -3,8 +3,8 @@ import { URLSearchParamsInit, useSearchParams } from 'react-router-dom'
 import { clearObject } from 'utils'
 
 export const useUrlQueryParam = <K extends string>(keys: K[]) => {
-  const [searchParams, setSearchParams] = useSearchParams()
-
+  const [searchParams] = useSearchParams()
+  const setSearchParams = useSetUrlSearchParam()
   return [
     useMemo(() => {
       return keys.reduce((prev: { [key in K]: string }, key: K) => {
@@ -13,9 +13,17 @@ export const useUrlQueryParam = <K extends string>(keys: K[]) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchParams]),
     (param: Partial<{ [key in K]: unknown }>) => {
-      // iterator 遍历器
-      const o = clearObject({ ...Object.fromEntries(searchParams), ...param }) as URLSearchParamsInit
-      return setSearchParams(o)
+      return setSearchParams(param)
     }
   ] as const
+}
+
+export const useSetUrlSearchParam = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  return (params: { [key in string]: unknown }) => {
+    // iterator 遍历器
+    const o = clearObject({ ...Object.fromEntries(searchParams), ...params }) as URLSearchParamsInit
+    return setSearchParams(o)
+  }
 }

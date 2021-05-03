@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
-import { User } from 'screen/project-list/search-panel'
+import { User } from 'types/user'
 import { useHttp } from './http'
 import { useAsync } from './use-async'
 import { clearObject } from 'utils'
