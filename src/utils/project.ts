@@ -2,12 +2,12 @@ import { QueryKey, useMutation, useQuery } from 'react-query'
 import { Project } from 'types/project'
 import { useHttp } from './http'
 import { useEditConfig, useAddConfig, useDeleteConfig } from './use-optimistic-options'
-// import { clearObject } from 'utils'
+import { clearObject } from 'utils'
 // import { useAsync } from './use-async'
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp()
-  return useQuery<Project[]>(['projects', param], () => client('projects', { data: param }))
+  return useQuery<Project[]>(['projects', clearObject(param)], () => client('projects', { data: param }))
 }
 
 export const useEditProject = (queryKey: QueryKey) => {

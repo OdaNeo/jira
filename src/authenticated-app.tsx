@@ -11,7 +11,7 @@ import { resetRoute } from 'utils'
 import { ProjectPopover } from 'components/project-popover'
 import { ButtonNoPadding } from 'components/libs'
 
-export const AuthenticatedApp = () => {
+const AuthenticatedApp = () => {
   return (
     <Container>
       <BrowserRouter>
@@ -28,6 +28,7 @@ export const AuthenticatedApp = () => {
     </Container>
   )
 }
+export default AuthenticatedApp
 
 const PageHeader = () => {
   return (

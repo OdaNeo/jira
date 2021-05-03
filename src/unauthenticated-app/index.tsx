@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 import { ErrorBox } from 'components/libs'
 // import { Helmet } from 'react-helmet'
 
-export const UnauthenticatedApp = (): JSX.Element => {
+const UnauthenticatedApp = (): JSX.Element => {
   const [isRegister, setIsRegister] = useState(false)
   const [error, setError] = useState<Error | null>(null)
 
@@ -27,6 +27,7 @@ export const UnauthenticatedApp = (): JSX.Element => {
     </Container>
   )
 }
+export default UnauthenticatedApp
 
 export const LongButton = styled(Button)`
   width: 100%;
