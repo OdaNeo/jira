@@ -35,8 +35,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "lint": "node_modules/.bin/eslint --ext .tsx,.ts src -c .eslintrc.js",
-    "prettier": "prettier --config ./.prettierrc --write src/*.{ts,tsx}",
+    "lint": "prettier --write src/**/*.{ts,tsx}",
     "mock": "json-server __json_server_mock__/db.json --watch --port 3002"
   },
   "browserslist": {
